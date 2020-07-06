@@ -2,8 +2,14 @@
 # create body
 body <- dashboardBody(
   
+  # stop warnings in console
+  tags$style(type="text/css",
+             ".shiny-output-error { visibility: hidden; }",
+             ".shiny-output-error:before { visibility: hidden; }"
+  )
+  
   # JS for Text after logo and sidebar button
-  tags$head(tags$style(HTML(
+  ,tags$head(tags$style(HTML(
     '.myClass {
         font-size: 20px;
         line-height: 50px;
@@ -21,7 +27,6 @@ body <- dashboardBody(
         $("header").find("nav").append(\'<span class="myClass"> SoMa West Cleanup </span>\');
       })
      '))
-  
   
   ## css style change
   ,tags$head(
@@ -75,7 +80,7 @@ body <- dashboardBody(
         ,label_on = "Adjusting data from screen"
         ,label_off = "Showing all data"
         # ,icon_on = icon("bar-chart", lib = "font-awesome")
-        # ,icon_off = icon("remove", lib = "glyphicon")
+        ,icon_off = icon("remove", lib = "glyphicon")
         ,value = TRUE
         ,status_on = "success"
         ,status_off = "danger"
@@ -97,6 +102,12 @@ body <- dashboardBody(
       )
       
       # circle packer for map categories
+      ,plotOutput(
+        "overlay_fillbar"
+        ,width = "220px"
+        ,height = "75px" 
+        # ,height = reactive({paste0(25 + (25 * (loln() - 1)),'px')})
+      )
       
       
     )

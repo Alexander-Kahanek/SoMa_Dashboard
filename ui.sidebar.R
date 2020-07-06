@@ -100,8 +100,8 @@ sidebar <- dashboardSidebar(
     ,direction = "vertical"
     ,choices = c(
       "Objects and Issues" = "ObjsIssues"
-      ,"Color by type" = "Types"
-      ,"Color by street" = "Streets"
+      ,"Color by Type" = "Types"
+      ,"Color by Street" = "Streets"
     )
                 
     ,status = "primary"

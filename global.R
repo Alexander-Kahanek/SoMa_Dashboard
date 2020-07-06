@@ -8,11 +8,24 @@ library(ggplot2) # for overlay plots
 library(ggthemes) # lollipop theme
 library(plotly) # percentage / lolipop?
 
+#############################################################
+# global data
+
+# base csv data
+# cleaned via raw/clean_script.R
+# used for base map data layer
+# will be manipulated later on
+raw <- read.csv("raw/clean_rubbish.csv") %>% 
+  subset(lat < 37.785)
+
+# dataframe for manipulation of the raw df to store
+# the data points that appear only on the screen.
+# used for overlat plot graphs
+onscreen_data <- raw
 
 
 #############################################################
 # global lists
-
 
 # all objects list
 objTypes <- c(
@@ -69,7 +82,7 @@ allLabels <- c(
 ObjsIssueColors <- c(
   "#E935f2" # objects
   ,"#F49D04" # issues
-  #,"#FFFFFF" # other
+  ,"#82F525" # other
 )
 
 typeColors <- c(
@@ -84,10 +97,10 @@ typeColors <- c(
   ,"#F49D04" # trashCanIssue
   ,"#EF0E07" # treeIssueWeeds
   ,"#EFE816" # otherIssue
-  # ????
-  # ,"#" # streetFurniture
-  # ,"#" # emptyTreeHole
-  # ,"#" # largeItem
+  # greens
+  ,"#82F525" # streetFurniture
+  ,"#118B21" # emptyTreeHole
+  ,"#54BC81" # largeItem
   
 )
 
@@ -121,18 +134,3 @@ streetLabels <- raw$street %>% unique()
 # loln <- reactiveVal(6)
 # values <- reactiveValues()
 # values$loln <- 6
-
-#############################################################
-# global data
-
-# base csv data
-# cleaned via raw/clean_script.R
-# used for base map data layer
-# will be manipulated later on
-raw <- read.csv("raw/clean_rubbish.csv") %>% 
-  subset(lat < 37.785)
-
-# dataframe for manipulation of the raw df to store
-# the data points that appear only on the screen.
-# used for overlat plot graphs
-onscreen_data <- raw
