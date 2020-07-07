@@ -33,9 +33,29 @@ Files:
     - ui.header.R
     - ui.sidebar.R
     - ui.body.R
-      + has texts, css changes, map, heatmap, overlay
+      + css: map&overlay.css
+        - alters css for leaflet map and overly element
+      + renders elements:
+        - manual css changes
+          + change to files
+        - leaflet output
+        - two sliders for heatmap
+        - plotly heatmap output
+        - overlay panel
+          + button to turn off reactive map scraping
+          + lollipop chart output
+          + progress bar output
 
 * server.R
   + contains library: shiny
   + creates interactive server
+    - reactive element: scrapes map screen data
+    - elements: text outputs
+      + create python function file for this
+    - interactive element: leaflet map creation
+    - reactive: interactive: element: plotly heatmap creation
+    - creates overlay output graphs
+      + reactive element: lollipop chart creation
+      + reactive element: percentage bar creation
+    -
     
