@@ -1,8 +1,53 @@
+library(shiny)
+
 #############################################################
 # creating server
 
 
 server <- function(input, output)({
+  
+  ####################################################
+  ## scraping user input
+  # this will be used for controlling 
+  # ,the (lat) & (long) range of geocoords
+  # ,the variable on the overlay plot
+  ## manipulating data
+  # need to manip dataframe to only contain datapoints
+  # that are displayed on the screen, so math.
+  #
+  # math proof comp. sci. style (for funsies)
+  # if:
+  # x_[a,n,b], y_[a,n,b] exists in world
+  # s.t. x_[1, .., n], y_[1, .., n] exists 
+  # for all x that exist on screen
+  # then:
+  # x_a <= x_n <= x_b 
+  # and y_a <= y_1n <= y_b
+  coordInBounds <- reactive({
+    if(input$useScreen){
+      if(is.null(input$map_bounds)){
+        # no user map displayed
+        return(onscreen_data[FALSE,])
+      }
+      # user screen map bounds
+      bounds <- input$map_bounds 
+      # getting [x_a, x_b]
+      long_rng <- range(bounds$east, bounds$west)
+      # scraping [y_a, y_b]
+      lat_rng <- range(bounds$north, bounds$south)
+      
+      # subset dataframe
+      # for overlay plots
+      onscreen_data <- raw %>%
+        subset(
+          lat >= lat_rng[1]
+          &lat <= lat_rng[2]
+          &long >= long_rng[1]
+          &long <= long_rng[2]
+        )
+    }
+  })
+  
   
   output$overlay_text <- renderText({ 
     "
@@ -77,7 +122,7 @@ server <- function(input, output)({
         lng= viewLatLong[['meanlong']]
         ,lat= viewLatLong[['meanlat']]
         # initial zoom, fits all points
-        ,zoom= 14 # 15.2
+        ,zoom= 15 # 15.2
       ) %>%
       addProviderTiles(
         # backgrounds
@@ -212,46 +257,67 @@ server <- function(input, output)({
     map
   })
   
-  ####################################################
-  ## scraping user input
-  # this will be used for controlling 
-  # ,the (lat) & (long) range of geocoords
-  # ,the variable on the overlay plot
-  ## manipulating data
-  # need to manip dataframe to only contain datapoints
-  # that are displayed on the screen, so math.
-  #
-  # math proof comp. sci. style (for funsies)
-  # if:
-  # x_[a,n,b], y_[a,n,b] exists in world
-  # s.t. x_[1, .., n], y_[1, .., n] exists 
-  # for all x that exist on screen
-  # then:
-  # x_a <= x_n <= x_b 
-  # and y_a <= y_1n <= y_b
-  coordInBounds <- reactive({
-    if(is.null(input$map_bounds)){
-      # no user map displayed
-      return(onscreen_data[FALSE,])
+  output$heatmap <- renderPlotly({
+    
+    allusrtype <- input$usrObjs
+    allusrtype <- allusrtype %>%  append(input$usrIssues)
+    
+    if (input$useScreen){
+      
+      if(coordInBounds() %>% nrow() == 0){
+        # nocoordinates displayed
+        return (NULL)
+      }
+      
+      usrdata <- coordInBounds() %>% 
+        subset(type %in% allusrtype)
     }
-    # user screen map bounds
-    bounds <- input$map_bounds 
-    # getting [x_a, x_b]
-    long_rng <- range(bounds$east, bounds$west)
-    # scraping [y_a, y_b]
-    lat_rng <- range(bounds$north, bounds$south)
+    else{
+      usrdata <- raw %>% 
+        subset(type %in% allusrtype)
+    }
     
-    # subset dataframe
-    # for overlay plots
-    onscreen_data <- raw %>%
-      subset(
-        lat >= lat_rng[1]
-        &lat <= lat_rng[2]
-        &long >= long_rng[1]
-        &long <= long_rng[2]
+    usrmatrix <- script_bins(
+      lats = usrdata$lat
+      ,lngs = usrdata$long
+      ,xbins = as.numeric(input$usrxbins)
+      ,ybins = as.numeric(input$usrybins)
       )
-  })
     
+    usrmatrix <- do.call("rbind",usrmatrix)
+    
+    bgcolor = "grey"
+    
+    colors <- brewer.pal(9, "RdPu")[c(1, 6:9)]
+    colors[1] <- "#ffffff"
+    
+    usrmatrix %>% 
+    heatmaply(
+      plot_method = "plotly"
+      ,colors = colorRampPalette(colors)
+      ,Rowv=FALSE
+      ,Colv=FALSE
+      ,draw_cellnote = FALSE
+      ,dendogram = "none"
+      ,show_dendrogram = c(FALSE, FALSE)
+      ,dend_hoverinfo = FALSE
+      ,grid_color = "grey"
+      ,titleX = FALSE
+      ,titleY = FALSE
+      ,showticklabels = c(FALSE, FALSE)
+      ,hide_colorbar = TRUE
+      ,grid_gap = 1
+    ) %>% 
+      # layout(plot_bgcolor='rgb(254, 247, 234)') %>% 
+      layout(paper_bgcolor='transparent') %>% 
+      config(displayModeBar = F) %>% 
+      layout(height = 300, width = "100%")
+  })
+ 
+  
+    
+  ###################################################################
+  # overlay plots
   
   ###### 2. lollipop count graph
   output$overlay_lollipop <- renderPlot({

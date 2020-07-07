@@ -6,7 +6,12 @@ library(leaflet) # for leaflet map
 library(leaflet.providers) # leaflet backgrounds
 library(ggplot2) # for overlay plots
 library(ggthemes) # lollipop theme
-library(plotly) # percentage / lolipop?
+
+library(heatmaply)
+library(plotly)
+library(RColorBrewer)
+library(reticulate)
+source_python('bin_geo.py')
 
 #############################################################
 # global data

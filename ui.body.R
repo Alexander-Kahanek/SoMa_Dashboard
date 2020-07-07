@@ -1,3 +1,4 @@
+library(shinydashboard)
 #############
 # create body
 body <- dashboardBody(
@@ -37,18 +38,43 @@ body <- dashboardBody(
   )
   
   ## custum css style change
-  # to keep map full height in page
+  # to keep map and heatmat full height in page
   # need to subtract 80px for header
   ,tags$style(
     type = "text/css"
-    ,"#map {height: calc(100vh - 80px) !important;}"
+    ,"#map {height: calc(50vh - 80px) !important;}"
   )
+  # ,tags$style(
+  #   type = "text/css"
+  #   ,"#heatmap {height: calc(90vh - 80px) !important;}"
+  # )
   
   ## output leaflet map
   ,leafletOutput(
     "map"
     ,width = "100%"
   )
+  
+  ,sliderTextInput(
+    inputId = "usrxbins"
+    ,selected = 89
+    ,label = "xbins:" 
+    ,choices = c(seq(1,100, b=2))
+    ,grid = TRUE
+  )
+  ,sliderTextInput(
+    inputId = "usrybins"
+    ,selected = 65
+    ,label = "ybins:" 
+    ,choices = c(seq(1,100, b=2))
+    ,grid = TRUE
+  )
+  
+  ,plotlyOutput(
+    "heatmap"
+    ,width = "100%"
+  )
+  
   
   # add statistics overlay panel 
   # if user stat button is true

@@ -1,3 +1,6 @@
+library(shinydashboard)
+library(shinyWidgets)
+
 ################
 # create sidebar
 sidebar <- dashboardSidebar(
@@ -96,12 +99,12 @@ sidebar <- dashboardSidebar(
   
   ,radioGroupButtons(
     inputId = "usrColor"
-    ,label = "Map Color Choices"
+    ,label = "Color By Options"
     ,direction = "vertical"
     ,choices = c(
       "Objects and Issues" = "ObjsIssues"
-      ,"Color by Type" = "Types"
-      ,"Color by Street" = "Streets"
+      ,"Object Type" = "Types"
+      ,"Street Location" = "Streets"
     )
                 
     ,status = "primary"

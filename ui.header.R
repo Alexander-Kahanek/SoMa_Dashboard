@@ -1,3 +1,4 @@
+library(shinydashboard)
 ###############
 # create headbar  
 header <- dashboardHeader(
@@ -15,6 +16,11 @@ header <- dashboardHeader(
   
   ,titleWidth = "230px"
   
-  ,tags$li(actionLink("popup_info", label = " Project Information", icon = icon("info")),
-           class = "dropdown")
+  ,tags$li(
+    actionLink(
+      "popup_info"
+      ,label = " Project Information"
+      ,icon = icon("info"))
+    ,class = "dropdown"
+    )
 )
