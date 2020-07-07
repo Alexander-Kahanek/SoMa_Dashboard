@@ -31,7 +31,19 @@ File Structure, will be changed into a graphic plot, when finished with applicat
   + stitches ui parts together
   + contains source files for ui parts
     - ui.header.R
+      + creates user interface header
+        - creates logo
+        - creates info button
     - ui.sidebar.R
+      + creates user interface sidebar element
+        - HTML header colors
+        - ui output option
+          + add a mobile option
+        - creates user input options
+          + toggle overlay graphs
+          + object type check boxes
+          - issue type check boxes
+          + color by radio button
     - ui.body.R
       + css: map&overlay.css
         - alters css for leaflet map and overly element
