@@ -1,6 +1,6 @@
 # Dashboard
 
-Files:
+File Structure, will be changed into a graphic plot, when finished with application.
 
 * app.R
   + main: file calls main header files and created the application
