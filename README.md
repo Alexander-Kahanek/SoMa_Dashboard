@@ -57,5 +57,4 @@ File Structure, will be changed into a graphic plot, when finished with applicat
     - creates overlay output graphs
       + reactive element: lollipop chart creation
       + reactive element: percentage bar creation
-    -
     
