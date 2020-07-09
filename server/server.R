@@ -58,6 +58,16 @@ server <- function(input, output)({
   observeEvent(
     input$popup_info
     ,{
+      
+      # fix cprint      
+      # rconsoleprint(
+      #   c(
+      #     "server.R"
+      #     ,"popup_info"
+      #     ,"systime"
+      #   )
+      # )
+      
       showModal(
         modalDialog(
           title = "Rubbish SoMa West Cleanup"
@@ -103,9 +113,17 @@ server <- function(input, output)({
       subset(type %in% input$usrIssues)
     
     
-    # add more color optiopns
-    # obj type
-    # area classification
+    # cprint
+    # c("server.R", "leafletusrchoices", "systime") %>%  
+    #   append(input$usrIssues) %>% 
+    #   append(input$input$usrObjs) %>% 
+    #   rconsoleprint()
+    
+    # c("server.R", "leafletusrchoices", "systime") %>%  
+    #     append(input$usrIssues) %>%
+    #     append(input$input$usrObjs) %>% 
+    #   paste0(collapse=" ") %>% 
+    #   print()
     
     
     map <- dfObjs %>%

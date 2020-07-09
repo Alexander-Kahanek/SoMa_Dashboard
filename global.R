@@ -2,16 +2,20 @@
 ###### DATA MANIPULATION ######
 options(stringsAsFactors = FALSE)
 library(dplyr) # for main data manipulations
+
 library(leaflet) # for leaflet map
 library(leaflet.providers) # leaflet backgrounds
-library(ggplot2) # for overlay plots
-library(ggthemes) # lollipop theme
 
-library(heatmaply)
-library(plotly)
-library(RColorBrewer)
-library(reticulate)
-source_python('bin_geo.py')
+library(ggplot2) # for overlay plots
+library(ggthemes) # overlay themes
+
+library(heatmaply) # for heatmap
+library(plotly) # for heatmaply rendering, options
+library(RColorBrewer) ## get rid of
+
+library(reticulate) # for python integration
+source_python('pybackend/bin_geo.py') # coordinates bin calculator
+# source_python('pybackend/console_print.py')
 
 #############################################################
 # global data

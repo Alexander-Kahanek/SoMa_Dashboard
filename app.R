@@ -1,6 +1,6 @@
 source('global.R')
-source('ui.R', local = TRUE)
-source('server.R')
+source('ui/ui.R', local = TRUE)
+source('server/server.R')
 
 #############################################################
 # run application
@@ -14,4 +14,4 @@ shinyApp(
 )
 
 # library(rsconnect)
-# deployApp(getwd())
+# rsconnect::deployApp(getwd())

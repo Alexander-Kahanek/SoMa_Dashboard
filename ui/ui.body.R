@@ -34,7 +34,7 @@ body <- dashboardBody(
     # Include custom CSS 
     # courtosy of:
     # https://github.com/rstudio/shiny-examples/tree/master/063-superzip-example
-    includeCSS("map&overlay.css")
+    includeCSS("css/map&overlay.css")
   )
   
   ## custum css style change
@@ -59,14 +59,14 @@ body <- dashboardBody(
     inputId = "usrxbins"
     ,selected = 89
     ,label = "xbins:" 
-    ,choices = c(seq(1,100, b=2))
+    ,choices = c(seq(1,200, b=1))
     ,grid = TRUE
   )
   ,sliderTextInput(
     inputId = "usrybins"
     ,selected = 65
     ,label = "ybins:" 
-    ,choices = c(seq(1,100, b=2))
+    ,choices = c(seq(1,200, b=1))
     ,grid = TRUE
   )
   

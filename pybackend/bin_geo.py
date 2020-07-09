@@ -1,7 +1,8 @@
-import random as rand
+# console printing library
+# import pybackend.console_print as cp
 
 
-def script_bins(lats, lngs, xbins=None, ybins=None, nbins=None):
+def script_bins(lats, lngs, xbins=None, ybins=None, nbins=None, cprint=True):
     '''
     takes two latitude and longitude lists, as well as
     number of x and y bins, or number of bins if same.
@@ -141,8 +142,11 @@ def script_bins(lats, lngs, xbins=None, ybins=None, nbins=None):
         return array0
 
     def main(lats, lngs, xbins, ybins):
+        '''
+        main function, follows algorithm:
+        '''
 
-        # print("script is starting, getting variables")
+        fp = "bin_geo.py"
 
         # get bounds
         xb, xa = max(lngs), min(lngs)
@@ -156,12 +160,8 @@ def script_bins(lats, lngs, xbins=None, ybins=None, nbins=None):
         deltax = float((xb - xa) / xbins)
         deltay = float((yb - ya) / ybins)
 
-        # print("creating lrudi list from variables")
-
         # create list for left, right, upp, down limits
         lrudiList = create_bins(xbins, ybins, deltax, deltay)
-
-        # print("sorting xy pairs into bins")
 
         # sort x, y pairs into lrudi list indexes
         num_moves = [sort_xy(pair, lrudiList, xbins, ybins)
@@ -173,10 +173,37 @@ def script_bins(lats, lngs, xbins=None, ybins=None, nbins=None):
 
         matrix = scrape_lrudi(lrudiList, array0)
 
+
+        # printlist = [
+        #     fp
+        #     ,"xa,xb"
+        #     ,','.join([str(xa),str(xb)])
+        #     ,"ya,yb"
+        #     ,','.join([str(ya),str(yb)])
+        #     ,"xbins"
+        #     ,str(xbins)
+        #     ,"ybins"
+        #     ,str(ybins)
+        #     ,"deltax"
+        #     ,str(deltax)
+        #     ,"deltay"
+        #     ,str(deltay)
+        #     ,"tmoves"
+        #     ,str(sum(num_moves))
+        #     ,"screenmatrix"
+        #     ,str(matrix)
+        # ]
+        # 
+        # print(" ".join(printlist))
+        
+        # "{fp} xa,xb {xa,xb} ya,yb {ya,yb} xbins {xbins} ybins {ybins} deltax {deltax} deltay {deltay} tmoves {sum(num_moves)} screenmatrix {matrix}"
+          
+        
         return matrix
 
         #########################################################################
 
+    # check data before main
     if nbins is not None:
         xbins, ybins = int(nbins), int(nbins)
     else:
@@ -203,6 +230,7 @@ def script_bins(lats, lngs, xbins=None, ybins=None, nbins=None):
 # nbins = int(rand.uniform(1, 20))
 
 # # matrix = script_bins(lats, lngs, xbins, ybins)
-# matrix = script_bins(lats, lngs, nbins=nbins)
+# matrix = script_bins(lats=lats, lngs=lngs, xbins=xbins,
+#                      ybins=ybins, cprint=True)
 
 # print(matrix)
