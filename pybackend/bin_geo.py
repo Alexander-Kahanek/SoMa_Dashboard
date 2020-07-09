@@ -1,6 +1,4 @@
-# console printing library
-# import pybackend.console_print as cp
-
+# geo-coordinate binning script
 
 def script_bins(lats, lngs, xbins=None, ybins=None, nbins=None, cprint=True):
     '''
