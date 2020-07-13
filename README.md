@@ -32,11 +32,11 @@ File Structure, will be changed into a graphic plot, when finished with applicat
   + `ui.R`
     - stitches together header, sidebar, and body ui code
     - contains source files for ui parts
-  + `header.R`
+  + `ui.header.R`
     - creates user interface header
       + creates logo
       + creates info button
-  + `sidebar.R`
+  + `ui.sidebar.R`
     - creates user interface sidebar element
       + HTML header colors
       + ui output option
@@ -46,8 +46,8 @@ File Structure, will be changed into a graphic plot, when finished with applicat
         - object type check boxes
         - issue type check boxes
         - color by radio button
-  + `body.R`
-    - css: map&overlay.css
+  + `ui.body.R`
+    - css: `map&overlay.css`
       + alters css for leaflet map and overly element
     - renders elements:
       + manual css changes
