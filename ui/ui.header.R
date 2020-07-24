@@ -2,7 +2,7 @@ library(shinydashboard)
 ###############
 # create headbar  
 header <- dashboardHeader(
-  # windowTitle = 'Rubbish SoMa West Cleanup'
+  # windowTitle = 'Rubbish Dashboard'
   # ,title = "Rubbish SoMa West Cleanup"
   # ,title=div(img(src="rubbish_logo.png"))
   title = tags$a(

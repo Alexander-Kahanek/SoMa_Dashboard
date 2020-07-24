@@ -55,6 +55,20 @@ server <- function(input, output)({
     "
   })
   
+  # observeEvent(input$applyChoices, {
+  #   updateCheckboxGroupButtons(
+  #     session = session, inputId = "somevalue",
+  #     selected = input$updateselected
+  #   )
+  # }, ignoreNULL = TRUE, ignoreInit = TRUE)
+  
+  output$bodyText <- renderText({ 
+    paste0("This is an interactive webpage!"
+           ," If you move the map, all the graphs will update"
+           ,", and if you change these sliders to the left, the granularity of the graph below will change!"
+           )
+  })
+  
   observeEvent(
     input$popup_info
     ,{
@@ -154,7 +168,7 @@ server <- function(input, output)({
     
     if (length(input$usrObjs) != 0){
       ######### objects ############
-    
+      
       if (input$usrColor == "ObjsIssues"){
         
         colorsort = "itemsTagged"
@@ -261,7 +275,7 @@ server <- function(input, output)({
           ,color = ~colissues(dfissues[,colorsort])
         )
     }
-      
+    
     ##### legend
     if (input$usrColor != "Streets"){
       map <- map %>% 
@@ -275,6 +289,8 @@ server <- function(input, output)({
     map
   })
   
+  
+  ###### 2. Heatmap 
   output$heatmap <- renderPlotly({
     
     allusrtype <- input$usrObjs
@@ -300,7 +316,7 @@ server <- function(input, output)({
       ,lngs = usrdata$long
       ,xbins = as.numeric(input$usrxbins)
       ,ybins = as.numeric(input$usrybins)
-      )
+    )
     
     usrmatrix <- do.call("rbind",usrmatrix)
     
@@ -310,22 +326,22 @@ server <- function(input, output)({
     colors[1] <- "#ffffff"
     
     usrmatrix %>% 
-    heatmaply(
-      plot_method = "plotly"
-      ,colors = colorRampPalette(colors)
-      ,Rowv=FALSE
-      ,Colv=FALSE
-      ,draw_cellnote = FALSE
-      ,dendogram = "none"
-      ,show_dendrogram = c(FALSE, FALSE)
-      ,dend_hoverinfo = FALSE
-      ,grid_color = "grey"
-      ,titleX = FALSE
-      ,titleY = FALSE
-      ,showticklabels = c(FALSE, FALSE)
-      ,hide_colorbar = TRUE
-      ,grid_gap = 1
-    ) %>% 
+      heatmaply(
+        plot_method = "plotly"
+        ,colors = colorRampPalette(colors)
+        ,Rowv=FALSE
+        ,Colv=FALSE
+        ,draw_cellnote = FALSE
+        ,dendogram = "none"
+        ,show_dendrogram = c(FALSE, FALSE)
+        ,dend_hoverinfo = FALSE
+        ,grid_color = "grey"
+        ,titleX = FALSE
+        ,titleY = FALSE
+        ,showticklabels = c(FALSE, FALSE)
+        ,hide_colorbar = TRUE
+        ,grid_gap = 1
+      ) %>% 
       # layout(plot_bgcolor='rgb(254, 247, 234)') %>% 
       layout(paper_bgcolor='transparent') %>% 
       config(displayModeBar = F) %>% 
@@ -429,7 +445,6 @@ server <- function(input, output)({
           ifelse(min(loldata$totItems) != max(loldata$totItems)
                  ,min(loldata$totItems)
                  ,0)
-          ,ceiling(max(loldata$totItems)*0.45)
           ,ceiling(max(loldata$totItems)*0.9)
         )
       )

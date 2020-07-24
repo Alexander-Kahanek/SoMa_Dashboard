@@ -7,26 +7,50 @@ sidebar <- dashboardSidebar(
   
   # Custom CSS to hide the default logout panel
   # lightpink F4B2F8 # F6A2FC # rubbish E935f2
-  tags$head(tags$style(HTML('.logo {
-                              background-color: #F6A2FC !important;
-                              }
-                              .navbar {
-                              background-color: #E935f2 !important;
-                              }
-                              ')))
+  # tags$head(tags$style(HTML('.logo {
+  #                             background-color: #F6A2FC !important;
+  #                             }
+  #                             .navbar {
+  #                             background-color: #E935f2 !important;
+  #                             }
+  #                             ')))
   
   # The dynamically-generated user panel
-  ,uiOutput("userpanel")
+  uiOutput("userpanel")
+  
+  ,collapsed = TRUE
   
   # stat box toggle switch
   ########################## # #
   # change color on checkbox
   ########################## # #
+  ,conditionalPanel(
+    condition = "input.insideOverlay != false"
+  
+    ,prettyToggle(
+      inputId = "sidebarOverlay"
+      ,label_on = "Close statistics panel!"
+      ,label_off = "Click to open statistics panel!"
+      ,icon_on = icon("remove", lib = "glyphicon")
+      ,icon_off = icon("bar-chart", lib = "font-awesome")
+      ,value = FALSE
+      ,status_on = "danger"
+      ,status_off = "success"
+      ,shape = "curve"
+      ,outline = FALSE
+      ,fill = TRUE
+      ,bigger = TRUE
+      ,animation = "pulse"
+      ,width = "100%"
+    )
+  )
+  
+  # use map screen data button
   ,prettyToggle(
-    inputId = "TFstat"
-    ,label_on = "Showing Stat Box"
-    ,label_off = "Hiding Stat Box"
-    ,icon_on = icon("bar-chart", lib = "font-awesome")
+    inputId = "useScreen"
+    ,label_on = "Adjusting data from screen"
+    ,label_off = "Showing all data!"
+    # ,icon_on = icon("bar-chart", lib = "font-awesome")
     ,icon_off = icon("remove", lib = "glyphicon")
     ,value = TRUE
     ,status_on = "success"
@@ -38,6 +62,7 @@ sidebar <- dashboardSidebar(
     ,animation = "pulse"
     ,width = "100%"
   )
+  
   
   # checkboxes for object types
   ####################### # #
@@ -119,9 +144,6 @@ sidebar <- dashboardSidebar(
       )
     )
   )
-  
-  ############
-  # add options: map options
-  # overlay?
-  # icons?
+  ,HTML('<script> document.title = "Rubbish Dashboard"; </script>')
+  # ,actionButton(inputId = "applyChoices", label = "Click to apply!")
 )
