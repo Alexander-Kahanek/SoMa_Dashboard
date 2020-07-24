@@ -5,14 +5,29 @@ source('ui/ui.theme.R')
 
 #############
 # create body
-body <- dashboardBody(title="Browser title"
+body <- dashboardBody(
   
-  ,custom_theme
+  custom_theme
   
-  # stop warnings in console
-  ,tags$style(type="text/css",
-             ".shiny-output-error { visibility: hidden; }",
-             ".shiny-output-error:before { visibility: hidden; }"
+  ,tags$head(
+    # grabs window dimensions for heatmaply object size
+    tags$script(src='backend/js/window_dimentions.js')
+    # controls map and overlay settings
+    ,includeCSS("backend/css/map&overlay.css")
+    # controls column adjustment priorities
+    ,includeCSS("backend/css/column_limiter.css")
+    
+  )
+  
+  
+  ,tags$style(
+    # limits page to maximun and mininum size  
+    includeHTML("backend/html/min&max_viewport.html")
+    # calls map width percentage - header size
+    ,includeCSS("backend/css/map_width.css")
+    # limits server output -- limits warnings / errors
+    ,includeCSS("backend/css/shiny_output.css")
+  
   )
   
   # JS for Text after logo and sidebar button
@@ -35,24 +50,6 @@ body <- dashboardBody(title="Browser title"
   #     })
   #    '))
   
-  ## css style change
-  ,tags$head(
-    # Include custom CSS 
-    # courtosy of:
-    # https://github.com/rstudio/shiny-examples/tree/master/063-superzip-example
-    includeCSS("css/map&overlay.css")
-    ,includeCSS("css/column_limiter.css")
-  )
-  
-  ## custum css style change
-  # to keep map and heatmat full height in page
-  # need to subtract 80px for header
-  ,tags$style(
-    type = "text/css"
-    ,"#map {height: calc(50vh - 80px) !important;}"
-  )
-  
-  
   ,fluidRow(
     ## output leaflet map
     column(12
@@ -68,11 +65,12 @@ body <- dashboardBody(title="Browser title"
     column(12
             
             ,fluidRow(
-              column(5
+              column(12
                 ,sliderTextInput(
                   inputId = "usrxbins"
+                  ,width = "90%"
                   ,selected = 50
-                  ,label = "How many x-axis bins do you want?"
+                  ,label = "Move this slider to change the number of columns."
                   ,choices = c(seq(1,200, b=1))
                   ,grid = FALSE
                 )
@@ -90,18 +88,6 @@ body <- dashboardBody(title="Browser title"
                 #   ,fgColor = "#428BCA"
                 #   ,inputColor = "#428BCA"
                 # )
-              )
-              
-              ,column(6
-                # ,sliderTextInput(
-                #   inputId = "usrybins"
-                #   ,selected = 65
-                #   ,label = "How many y bins do you want?" 
-                #   ,choices = c(seq(1,200, b=1))
-                #   ,grid = TRUE
-                # )
-                ,textOutput("bodyText")
-                
               )
             )
     )
@@ -122,7 +108,7 @@ body <- dashboardBody(title="Browser title"
     column(2
       ,knobInput(
         inputId = "usrybins"
-        ,label = "y-axis bins"
+        ,label = "Number of rows"
         ,height = "100px"
         ,width = "100px"
         ,value = 50
@@ -133,6 +119,8 @@ body <- dashboardBody(title="Browser title"
         ,fgColor = "#428BCA"
         ,inputColor = "#428BCA"
       )
+      
+      ,textOutput("bodyText")
     )
     
     ,column(10
@@ -176,8 +164,8 @@ body <- dashboardBody(title="Browser title"
       
       ,prettyToggle(
         inputId = "insideOverlay"
-        ,label_on = "Use the sidebar close button!"
-        ,label_off = "Close me!"
+        ,label_on = "Use the sidebar close button"
+        ,label_off = "Click to close"
         ,icon_on = icon("bar-chart", lib = "font-awesome")
         ,icon_off = icon("remove", lib = "glyphicon")
         ,value = FALSE

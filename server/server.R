@@ -6,6 +6,8 @@ library(shiny)
 
 server <- function(input, output)({
   
+  options(warn = -1) 
+  
   ####################################################
   ## scraping user input
   # this will be used for controlling 
@@ -65,7 +67,7 @@ server <- function(input, output)({
   output$bodyText <- renderText({ 
     paste0("This is an interactive webpage!"
            ," If you move the map, all the graphs will update"
-           ,", and if you change these sliders to the left, the granularity of the graph below will change!"
+           ,", and if you change the sliders above, the granularity of the graph below will change!"
            )
   })
   
@@ -345,7 +347,7 @@ server <- function(input, output)({
       # layout(plot_bgcolor='rgb(254, 247, 234)') %>% 
       layout(paper_bgcolor='transparent') %>% 
       config(displayModeBar = F) %>% 
-      layout(height = 300, width = "100%")
+      layout(width = (0.95*as.numeric(input$dimension[1])), height = 0.4*as.numeric(input$dimension[2]))#(height = 300, width = "1000px")
   })
  
   
@@ -433,13 +435,13 @@ server <- function(input, output)({
       theme(legend.position = "none") + 
       coord_flip() + 
       scale_x_continuous(
-        ""
+        NULL
         # fix y labels
         ,breaks = loldata$order
         ,labels = loldata$type
       ) + 
       scale_y_discrete(
-        ""
+        NULL
         # fix x limits and labels
         ,limits = c(
           ifelse(min(loldata$totItems) != max(loldata$totItems)
@@ -524,7 +526,7 @@ server <- function(input, output)({
       theme(legend.position = "none") +
       coord_flip() + 
       scale_y_continuous(
-        ""
+        NULL
         # fix x limits and labels
         ,limit = c(
           0, maxitems

@@ -14,7 +14,7 @@ library(plotly) # for heatmaply rendering, options
 library(RColorBrewer) ## get rid of
 
 library(reticulate) # for python integration
-source_python('pybackend/bin_geo.py') # coordinates bin calculator
+source_python('backend/python/bin_geo.py') # coordinates bin calculator
 # source_python('pybackend/console_print.py')
 
 #############################################################

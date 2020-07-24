@@ -29,8 +29,8 @@ sidebar <- dashboardSidebar(
   
     ,prettyToggle(
       inputId = "sidebarOverlay"
-      ,label_on = "Close statistics panel!"
-      ,label_off = "Click to open statistics panel!"
+      ,label_on = "Click to close statistics panel"
+      ,label_off = "Click to open statistics panel"
       ,icon_on = icon("remove", lib = "glyphicon")
       ,icon_off = icon("bar-chart", lib = "font-awesome")
       ,value = FALSE
@@ -49,7 +49,7 @@ sidebar <- dashboardSidebar(
   ,prettyToggle(
     inputId = "useScreen"
     ,label_on = "Adjusting data from screen"
-    ,label_off = "Showing all data!"
+    ,label_off = "Showing all available data"
     # ,icon_on = icon("bar-chart", lib = "font-awesome")
     ,icon_off = icon("remove", lib = "glyphicon")
     ,value = TRUE
