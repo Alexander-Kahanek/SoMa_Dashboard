@@ -6,8 +6,6 @@ library(shiny)
 
 server <- function(input, output)({
   
-  options(warn = -1) 
-  
   ####################################################
   ## scraping user input
   # this will be used for controlling 
@@ -50,20 +48,6 @@ server <- function(input, output)({
     }
   })
   
-  
-  output$overlay_text <- renderText({ 
-    "
-    Move your map to change the graphs!
-    "
-  })
-  
-  # observeEvent(input$applyChoices, {
-  #   updateCheckboxGroupButtons(
-  #     session = session, inputId = "somevalue",
-  #     selected = input$updateselected
-  #   )
-  # }, ignoreNULL = TRUE, ignoreInit = TRUE)
-  
   output$bodyText <- renderText({ 
     paste0("This is an interactive webpage!"
            ," If you move the map, all the graphs will update"
@@ -74,15 +58,6 @@ server <- function(input, output)({
   observeEvent(
     input$popup_info
     ,{
-      
-      # fix cprint      
-      # rconsoleprint(
-      #   c(
-      #     "server.R"
-      #     ,"popup_info"
-      #     ,"systime"
-      #   )
-      # )
       
       showModal(
         modalDialog(
@@ -127,19 +102,6 @@ server <- function(input, output)({
     
     dfissues <- raw %>% 
       subset(type %in% input$usrIssues)
-    
-    
-    # cprint
-    # c("server.R", "leafletusrchoices", "systime") %>%  
-    #   append(input$usrIssues) %>% 
-    #   append(input$input$usrObjs) %>% 
-    #   rconsoleprint()
-    
-    # c("server.R", "leafletusrchoices", "systime") %>%  
-    #     append(input$usrIssues) %>%
-    #     append(input$input$usrObjs) %>% 
-    #   paste0(collapse=" ") %>% 
-    #   print()
     
     
     map <- dfObjs %>%
@@ -347,7 +309,7 @@ server <- function(input, output)({
       # layout(plot_bgcolor='rgb(254, 247, 234)') %>% 
       layout(paper_bgcolor='transparent') %>% 
       config(displayModeBar = F) %>% 
-      layout(width = (0.95*as.numeric(input$dimension[1])), height = 0.4*as.numeric(input$dimension[2]))#(height = 300, width = "1000px")
+      layout(width = (1*as.numeric(input$dimension[1])), height = 0.4*as.numeric(input$dimension[2]))#(height = 300, width = "1000px")
   })
  
   

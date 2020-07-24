@@ -15,7 +15,10 @@ library(RColorBrewer) ## get rid of
 
 library(reticulate) # for python integration
 source_python('backend/python/bin_geo.py') # coordinates bin calculator
-# source_python('pybackend/console_print.py')
+
+# supress messages not covered in css file
+options(warn = -1) 
+options(dplyr.summarise.inform=FALSE)
 
 #############################################################
 # global data
@@ -137,9 +140,3 @@ streetColors <- c(
 )
 
 streetLabels <- raw$street %>% unique()
-
-
-# reactive values? not working, lollipop type count
-# loln <- reactiveVal(6)
-# values <- reactiveValues()
-# values$loln <- 6

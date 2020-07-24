@@ -14,7 +14,7 @@ custom_theme <- shinyDashboardThemeDIY(
   ### header
   ,logoBackColor = "rgb(219,219,219)"
   
-  ,headerButtonBackColor = "rgb(219,219,219)"# "rgb(238,238,238)"
+  ,headerButtonBackColor = "rgb(219,219,219)"
   ,headerButtonIconColor = "rgb(0,0,0)"
   ,headerButtonBackColorHover = "rgb(233,53,242)"
   ,headerButtonIconColorHover = "rgb(0,0,0)"
@@ -27,7 +27,7 @@ custom_theme <- shinyDashboardThemeDIY(
     ,colorStartPos = 0
     ,colorMiddlePos = 75
     ,colorEndPos = 90
-  ) # "rgb(233,53,242)"
+  ) 
   ,headerBoxShadowColor = "#aaaaaa"
   ,headerBoxShadowSize = "0px 0px 0px"
   

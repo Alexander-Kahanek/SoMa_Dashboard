@@ -1,6 +1,6 @@
 library(shinydashboard)
 library(dashboardthemes)
-source('ui/ui.theme.R')
+source('ui/theme.R')
 
 
 #############
@@ -68,39 +68,16 @@ body <- dashboardBody(
               column(12
                 ,sliderTextInput(
                   inputId = "usrxbins"
-                  ,width = "90%"
+                  ,width = "98%"
                   ,selected = 50
                   ,label = "Move this slider to change the number of columns."
                   ,choices = c(seq(1,200, b=1))
                   ,grid = FALSE
                 )
-                
-                # ,knobInput(
-                #   inputId = "usrxbins"
-                #   ,label = "x-axis bins"
-                #   ,height = "100px"
-                #   ,width = "100px"
-                #   ,value = 50
-                #   ,min = 0
-                #   ,max = 200
-                #   ,displayPrevious = TRUE
-                #   ,lineCap = "round"
-                #   ,fgColor = "#428BCA"
-                #   ,inputColor = "#428BCA"
-                # )
               )
             )
     )
   )
-  
-  
-  # ,fluidRow(
-  #   column(12
-  #          
-  #          # ,textOutput("bodyText")
-  #          
-  #   )
-  # )
   
   
   ,fixedRow(
@@ -131,13 +108,6 @@ body <- dashboardBody(
     )
            
   )
-  
-  
-
-  
-  
-  
-  
   
   
   # add statistics overlay panel 

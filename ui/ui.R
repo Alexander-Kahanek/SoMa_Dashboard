@@ -1,24 +1,9 @@
-source('ui/ui.header.R')
-source('ui/ui.sidebar.R')
-source('ui/ui.body.R')
+source('ui/parts/header.R')
+source('ui/parts/sidebar.R')
+source('ui/parts/body.R')
 
 ##########
 # merge ui
-
-
-# onStart <- function(input, output) {
-#   
-#   ### function to detect mobile ####
-#   mobileDetect <- function(inputId, value = 0) {
-#     tagList(
-#       singleton(tags$head(tags$script(src = "js/mobile.js"))),
-#       tags$input(id = inputId,
-#                  class = "mobile-element",
-#                  type = "hidden")
-#     )
-#   }
-#   
-# }
 
 # no control of window size
 # ui <- shinyUI({dashboardPage(header, sidebar, body)})
