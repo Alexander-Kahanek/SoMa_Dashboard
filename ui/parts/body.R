@@ -16,7 +16,10 @@ body <- dashboardBody(
     ,includeCSS("backend/css/map&overlay.css")
     # controls column adjustment priorities
     ,includeCSS("backend/css/column_limiter.css")
-    
+    # controls google analytics header
+    ,includeHTML("backend/html/google_analytics.html")
+    # tracking elements and sending to google analytics
+    ,includeScript("backend/js/tracking.js")
   )
   
   
