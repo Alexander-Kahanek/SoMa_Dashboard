@@ -24,16 +24,14 @@ body <- dashboardBody(
   
   
   ,tags$style(
-    # limits page to maximun and mininum size  
-    includeHTML("backend/html/min&max_viewport.html")
     # calls map width percentage - header size
-    ,includeCSS("backend/css/map_width.css")
+    includeCSS("backend/css/map_height.css")
     # limits server output -- limits warnings / errors
     ,includeCSS("backend/css/shiny_output.css")
   
   )
   
-  # JS for Text after logo and sidebar button
+  # # JS for Text after logo and sidebar button
   # ,tags$head(tags$style(HTML(
   #   '.myClass {
   #       font-size: 20px;
@@ -42,16 +40,48 @@ body <- dashboardBody(
   #       font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   #       padding: 0 15px;
   #       overflow: hidden;
-  #       color: white;
+  #       color: black;
   #     }
   #   '
   # )))
-  # write text next to logo
+  # # write text next to logo
   # ,tags$script(HTML('
   #     $(document).ready(function() {
-  #       $("header").find("nav").append(\'<span class="myClass"> SoMa West Cleanup </span>\');
+  #       $("header").find("nav").append(\'<span class="myClass"> Interactive Litter and Quality of Life Map of SoMa, San Francisco </span>\');
   #     })
   #    '))
+  
+  
+  ,fluidRow(
+    
+    column(12
+           
+           ,fluidRow(
+             align = "center"
+             ,column(12
+                     # ,box(width="100%", height = "5px")
+                     ,h2(HTML("<b>Interactive Litter and Quality of Life Map of SoMa, San Francisco</b>"))
+             )
+           )
+    )
+  )
+  
+  
+  ,fluidRow(
+    
+    column(12
+           
+           ,fluidRow(
+             align = "center"
+             ,column(12
+                     ,box(width="100%", height = "5px")
+                     ,h4(HTML("<b>The SoMa West community came together and mapped every issue
+                              in their neighborhood. Now they're working together to fix it.
+                              See project information link for more!</b>"))
+             )
+           )
+    )
+  )
   
   ,fluidRow(
     ## output leaflet map
@@ -60,6 +90,7 @@ body <- dashboardBody(
              "map"
              ,width = "100%"
            )
+           ,style='padding-left:90px; padding-right:95px;'
     )
   )
   
@@ -68,15 +99,11 @@ body <- dashboardBody(
     column(12
             
             ,fluidRow(
-              column(12
-                ,sliderTextInput(
-                  inputId = "usrxbins"
-                  ,width = "98%"
-                  ,selected = 50
-                  ,label = "Move this slider to change the number of columns."
-                  ,choices = c(seq(1,200, b=1))
-                  ,grid = FALSE
-                )
+              align = "center"
+              ,column(12
+                ,br()
+                ,box(width="100%", height = "5px")
+                ,h4(HTML("<b>Bin Heat Map (Adjust resolution with left hand toggle)</b>"))
               )
             )
     )
@@ -85,110 +112,111 @@ body <- dashboardBody(
   
   ,fixedRow(
     
-    column(2
-      ,knobInput(
-        inputId = "usrybins"
-        ,label = "Number of rows"
-        ,height = "100px"
-        ,width = "100px"
-        ,value = 50
-        ,min = 0
-        ,max = 200
-        ,displayPrevious = TRUE
-        ,lineCap = "round"
-        ,fgColor = "#428BCA"
-        ,inputColor = "#428BCA"
-      )
-      
-      ,textOutput("bodyText")
-    )
+
+    # ,textOutput("bodyText")
+
     
-    ,column(10
+    column(12
            ,plotlyOutput(
              "heatmap"
              ,width = "100%"
            )
+           ,style='padding-left:80px;'
     )
-           
+    
   )
+           
   
   
-  # add statistics overlay panel 
+  # add statistics overlay panel
   # if user stat button is true
   ,conditionalPanel(
     condition = "input.insideOverlay == false | input.sidebarOverlay == true",
-    
+
     ############# draw overlay panel
     absolutePanel(
+      
       # settings
       id = "controls"
       ,class = "collapse in"
       ,fixed = TRUE
       ,draggable = TRUE
-      ,top = 80
+      ,top = 120
       ,left = "auto"
       ,right = 25
       ,bottom = "auto"
-      ,width = 250
+      # ,width = 250
+      ,width = 375
       ,height = "auto"
       
-      ## header          
-      ,h4("You can drag me!")
-      
-      ,prettyToggle(
-        inputId = "insideOverlay"
-        ,label_on = "Use the sidebar close button"
-        ,label_off = "Click to close"
-        ,icon_on = icon("bar-chart", lib = "font-awesome")
-        ,icon_off = icon("remove", lib = "glyphicon")
-        ,value = FALSE
-        ,status_on = "success"
-        ,status_off = "danger"
-        ,shape = "curve"
-        ,outline = FALSE
-        ,fill = TRUE
-        ,bigger = TRUE
-        ,animation = "pulse"
-        ,width = "100%"
-      )
-      
-      
-      # total objects shown / all objects
-      
       ,fluidRow(
-        column(12
-          ,plotOutput(
-            "overlay_lollipop"
-            ,width = "220px"
-            ,height = "150px" 
-            # ,height = reactive({paste0(25 + (25 * (loln() - 1)),'px')})
-          )
-        )
-      )
-      
-      
-      ,fluidRow(
-        column(12
-               # circle packer for map categories
-               ,plotOutput(
-                 "overlay_fillbar"
-                 ,width = "220px"
-                 ,height = "75px" 
-                 # ,height = reactive({paste0(25 + (25 * (loln() - 1)),'px')})
+        align = "center"
+        ,column(12
+               ## header
+               ,h4(HTML("<b>You can drag me!</b>"))
+               
+               
+               ,actionBttn(
+                 inputId = "insideOverlay",
+                 label = "Close!",
+                 style = "float", 
+                 color = "danger"
                )
         )
       )
       
-      
-      
+      ,fluidRow( # blank space
+        align = "center"
+        ,column(12
+                ,br()
+                ,box(width="100%", height = "5px")
+                ,h5(HTML("<b>Number of items on map</b>"))
+        )
+      )
+
+      ,fluidRow( # lollipop graph
+        column(12
+          ,plotOutput(
+            "overlay_lollipop"
+            ,height = "150px"
+            ,width = "320px"
+          )
+        )
+      )
+
+
+      ,fluidRow( # blank space
+        align = "center"
+        ,column(12
+               ,box(width="100%", height = "5px")
+               ,h5(HTML("<b>Proportion of points on map</b>"))
+        )
+      )
+
+      ,fluidRow( # proportion bar
+        column(12
+               ,plotOutput(
+                 "overlay_fillbar"
+                 ,height = "75px"
+                 ,width = "320px"
+               )
+        )
+      )
+
+
+
     )
+    
+    ,h6(HTML('<b>Data collected by Rubbish, page created by Alexander Kahanek.</b>'))
+    # # sidebar will cover this text
+    # ,tags$div(
+    #   id="cite"
+    #   ,HTML('<b>Data collected by Rubbish, page created by Alexander Kahanek.</b>')
+    #   # ,align = "center"
+    # )
   )
   
-  # sidebar will cover this text
-  ,tags$div(
-    id="cite"
-    ,'Data collected by Rubbish, page created by Alexander Kahanek'
-  )
+  
 
   
 )

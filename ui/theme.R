@@ -3,44 +3,30 @@ custom_theme <- shinyDashboardThemeDIY(
   
   ### general
   appFontFamily = "Arial"
-  ,appFontColor = "rgb(0,0,0)"
+  ,appFontColor = "rgb(0,0,0)" # "rgb(240,19,130)" rubbish pink
   ,primaryFontColor = "rgb(0,0,0)"
   ,infoFontColor = "rgb(0,0,0)"
   ,successFontColor = "rgb(0,0,0)"
   ,warningFontColor = "rgb(0,0,0)"
   ,dangerFontColor = "rgb(0,0,0)"
-  ,bodyBackColor = "rgb(219,219,219)"
+  ,bodyBackColor = "rgb(231,231,231)" # "rgb(219,219,219)" # "rgb(255,255,255)" 
   
   ### header
   ,logoBackColor = "rgb(219,219,219)"
   
   ,headerButtonBackColor = "rgb(219,219,219)"
   ,headerButtonIconColor = "rgb(0,0,0)"
-  ,headerButtonBackColorHover = "rgb(233,53,242)"
+  ,headerButtonBackColorHover = "rgb(240,19,130)"
   ,headerButtonIconColorHover = "rgb(0,0,0)"
   
-  ,headerBackColor = cssGradientThreeColors(
-    direction = "right"
-    ,colorStart = "rgb(219,219,219)"
-    ,colorMiddle = "rgb(233,53,242)"
-    ,colorEnd = "rgb(233,53,242)"
-    ,colorStartPos = 0
-    ,colorMiddlePos = 75
-    ,colorEndPos = 90
-  ) 
+  ,headerBackColor = "rgb(219,219,219)"
+    
   ,headerBoxShadowColor = "#aaaaaa"
-  ,headerBoxShadowSize = "0px 0px 0px"
+  ,headerBoxShadowSize = "3px 5px 5px" # "0px 0px 0px"
   
   ### sidebar
-  ,sidebarBackColor = cssGradientThreeColors(
-    direction = "down"
-    ,colorStart = "rgb(219,219,219)"
-    ,colorMiddle = "rgb(240,240,240)"
-    ,colorEnd = "rgb(255,255,255)"
-    ,colorStartPos = 0
-    ,colorMiddlePos = 30
-    ,colorEndPos = 90
-  )
+  ,sidebarBackColor = "rgb(219,219,219)"
+    
   ,sidebarPadding = 0
   
   ,sidebarMenuBackColor = "transparent"
@@ -62,15 +48,8 @@ custom_theme <- shinyDashboardThemeDIY(
   ,sidebarTabBorderColor = "rgb(35,106,135)"
   ,sidebarTabBorderWidth = 1
   
-  ,sidebarTabBackColorSelected = cssGradientThreeColors(
-    direction = "right"
-    ,colorStart = "rgba(44,222,235,1)"
-    ,colorMiddle = "rgba(44,222,235,1)"
-    ,colorEnd = "rgba(0,0,0,0)"
-    ,colorStartPos = 0
-    ,colorMiddlePos = 30
-    ,colorEndPos = 100
-  )
+  ,sidebarTabBackColorSelected = "rgb(240,19,130)"
+    
   ,sidebarTabTextColorSelected = "rgb(0,0,0)"
   ,sidebarTabRadiusSelected = "0px 20px 20px 0px"
   
@@ -96,11 +75,11 @@ custom_theme <- shinyDashboardThemeDIY(
   ,boxShadowColor = "rgba(0,0,0,.1)"
   ,boxTitleSize = 16
   ,boxDefaultColor = "rgb(210,214,220)"
-  ,boxPrimaryColor = "rgba(44,222,235,1)"
-  ,boxInfoColor = "rgb(210,214,220)"
-  ,boxSuccessColor = "rgba(233,53,242,1)"
-  ,boxWarningColor = "rgb(244,156,104)"
-  ,boxDangerColor = "rgb(255,88,55)"
+  ,boxPrimaryColor = "rgb(240,19,130)"
+  ,boxInfoColor = "rgb(240,19,130)"
+  ,boxSuccessColor = "rgb(240,19,130)"
+  ,boxWarningColor = "rgb(240,19,130)"
+  ,boxDangerColor = "rgb(240,19,130)"
   
   ,tabBoxTabColor = "rgb(255,255,255)"
   ,tabBoxTabTextSize = 14

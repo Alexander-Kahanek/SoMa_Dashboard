@@ -9,18 +9,35 @@ header <- dashboardHeader(
     href='https://www.rubbish.love/'
     ,target = '_blank'
     ,tags$img(
-      src='rubbish_logo.png'
-      ,height='25',width='200px'
+      src='header_logo.png'
+      # ,height='35px',width='200px'
     )
   )
   
   ,titleWidth = "230px"
   
   ,tags$li(
+    downloadLink(
+      'downloadData'
+      ,label = tags$img(
+        src='download_button.png'
+        # ,height='18px',width='200px'
+      )
+      )
+    ,class="dropdown"
+  )
+  
+  ,tags$li(
+    
     actionLink(
       "popup_info"
-      ,label = " Project Information"
-      ,icon = icon("info"))
+      ,label = tags$img(
+          src='information_button.png'
+          # ,height='18px',width='200px'
+      )
+      # ,icon = icon("info")
+      # ,icon = img()
+      )
     ,class = "dropdown"
     )
 )

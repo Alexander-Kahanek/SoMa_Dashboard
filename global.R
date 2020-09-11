@@ -85,21 +85,27 @@ allLabels <- c(
   ,"Large Item" # 12
 )
 
+streetLabels <- raw$street %>% unique()
+
+classificationLabels <- raw$classification %>% unique()
+
 ##############
 # colors list
 # rubbish E935f2 
 # lightpink F4B2F8 | F6A2FC
 # orange F49D04
 
+btnColor <- "primary"
+
 ObjsIssueColors <- c(
-  "#E935f2" # objects
+  "#F01382" # objects
   ,"#F49D04" # issues
   ,"#82F525" # other
 )
 
 typeColors <- c(
   # pinks, blues
-  "#E935F2" # litter
+  "#F01382" # litter
   ,"#F38EF8" # greaseGumStains
   ,"#A90E75" # graffiti
   ,"#780EA9" # needles
@@ -116,9 +122,15 @@ typeColors <- c(
   
 )
 
+classificationColors <- c(
+  "#F01382" # residential
+  ,"#F49D04" # commercial
+  ,"#134FF0" # other
+)
+
 
 streetColors <- c(
-  # 72 hex colors
+  # 72 hex colors for 72 streets
   "#E935F2", "#800000", "#008000", "#808000" # 1 - 4
   , "#000080", "#800080", "#008080", "#ff0000" # 5 - 8
   , "#00ff00", "#ffff00", "#0000ff", "#ff00ff" # 9 - 12
@@ -138,5 +150,3 @@ streetColors <- c(
   , "#ffd7d7", "#ffd7ff", "#afff00", "#ffafd7" # 65 - 68
   , "#d7ff00", "#d7afd7", "#d7d7d7", "#767676" # 69 - 72
 )
-
-streetLabels <- raw$street %>% unique()
