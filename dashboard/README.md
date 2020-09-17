@@ -1,6 +1,6 @@
-# Dashboard
+# Dashboard Structure
 
-File Structure, will be changed into a graphic plot, when finished with application.
+This is the file structure of the dashboard, including what is included in each file.
 
 * `app.R`
   + main: file calls main header files and created the application
