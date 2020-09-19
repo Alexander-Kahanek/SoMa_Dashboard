@@ -12,53 +12,57 @@ This is the file structure of the dashboard, including what is included in each 
 * `global.R`
   + declares all global libraries, lists, and data
   + contains libraries for all graphs
+    - dplyr (for all data manipulation)
     - reticulate (for python integration)
     - created python scripts (coordinate binning)
-    - leaflet (map)
-    - ggplot (overlays)
-    - plotly (heatmap)
+    - leaflet (map) [leaflet, leaflet.providers]
+    - ggplot (overlays) [ggplot2, ggthemes]
+    - plotly (heatmap) [heatmaply, plotly, RColorBrewer]
   + declare global lists
     - object type list
     - issue type list
     - other type list
-    - all labels in a list
-    - objects, issues, others, hex color
-    - colors by all type list
-    - all street colors
-    - all street labels
+    - all labels
+    - street labels
+    - objects, issues, all types, zoning classification, streets
+      + hex color codes for entire dashboard
     
 * `/ui/`
   + folder stores all ui elements
   + `ui.R`
     - stitches together header, sidebar, and body ui code
     - contains source files for ui parts
-  + `ui.header.R`
-    - creates user interface header
-      + creates logo
-      + creates info button
-  + `ui.sidebar.R`
-    - creates user interface sidebar element
-      + HTML header colors
-      + ui output option
-        - add a mobile option
-      + creates user input options
-        - toggle overlay graphs
-        - object type check boxes
-        - issue type check boxes
-        - color by radio button
-  + `ui.body.R`
-    - css: `map&overlay.css`
-      + alters css for leaflet map and overly element
-    - renders elements:
-      + manual css changes
-        - change to files
-      + leaflet output
-      + two sliders for heatmap
-      + plotly heatmap output
-      + overlay panel
-        - button to turn off reactive map scraping
-        - lollipop chart output
-        - progress bar output
+  + `theme.R`
+    - holds all theming options for entire dashboard
+    - https://github.com/nik01010/dashboardthemes
+  + `/parts/`
+    + `ui.header.R`
+      - creates user interface header
+        + creates logo
+        + creates info button
+    + `ui.sidebar.R`
+      - creates user interface sidebar element
+        + HTML header colors
+        + ui output option
+          - add a mobile option
+        + creates user input options
+          - toggle overlay graphs
+          - object type check boxes
+          - issue type check boxes
+          - color by radio button
+    + `ui.body.R`
+      - css: `map&overlay.css`
+        + alters css for leaflet map and overly element
+      - renders elements:
+        + manual css changes
+          - change to files
+        + leaflet output
+        + two sliders for heatmap
+        + plotly heatmap output
+        + overlay panel
+          - button to turn off reactive map scraping
+          - lollipop chart output
+          - progress bar output
 
 * `/server/`
   + folder stores all parts needed for the server
