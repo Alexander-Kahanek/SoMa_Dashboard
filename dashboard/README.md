@@ -12,88 +12,107 @@ This is the file structure of the dashboard, including what is included in each 
 * `global.R`
   + declares all global libraries, lists, and data
   + contains libraries for all graphs
+    - dplyr (for all data manipulation)
     - reticulate (for python integration)
     - created python scripts (coordinate binning)
-    - leaflet (map)
-    - ggplot (overlays)
-    - plotly (heatmap)
+    - leaflet (map) [leaflet, leaflet.providers]
+    - ggplot (overlays) [ggplot2, ggthemes]
+    - plotly (heatmap) [heatmaply, plotly, RColorBrewer]
   + declare global lists
     - object type list
     - issue type list
     - other type list
-    - all labels in a list
-    - objects, issues, others, hex color
-    - colors by all type list
-    - all street colors
-    - all street labels
-    
+    - all labels
+    - street labels
+    - objects, issues, all types, zoning classification, streets
+      + hex color codes for entire dashboard
++`/server/`
+  + `server.R`
+    - contains library: shiny
+    - creates interactive server
+      + reactive element:
+        - CoordInBounds: scrapes map screen data
+          - idea from: https://github.com/rstudio/shiny-examples/tree/master/063-superzip-example
+        - percentage bar creation
+        - lollipop chart creation
+      + elements: text outputs
+      + interactive element:
+        - leaflet map creation
+        - download data button
+      + reactive: interactive: element: 
+        - plotly heatmap creation
+
+
 * `/ui/`
   + folder stores all ui elements
   + `ui.R`
     - stitches together header, sidebar, and body ui code
     - contains source files for ui parts
-  + `ui.header.R`
-    - creates user interface header
-      + creates logo
-      + creates info button
-  + `ui.sidebar.R`
-    - creates user interface sidebar element
-      + HTML header colors
-      + ui output option
-        - add a mobile option
-      + creates user input options
-        - toggle overlay graphs
-        - object type check boxes
-        - issue type check boxes
-        - color by radio button
-  + `ui.body.R`
-    - css: `map&overlay.css`
-      + alters css for leaflet map and overly element
-    - renders elements:
-      + manual css changes
-        - change to files
-      + leaflet output
-      + two sliders for heatmap
-      + plotly heatmap output
-      + overlay panel
-        - button to turn off reactive map scraping
-        - lollipop chart output
-        - progress bar output
+  + `theme.R`
+    - holds all theming options for entire dashboard
+      - https://github.com/nik01010/dashboardthemes
+  + `/parts/`
+    + `ui.header.R`
+      - creates user interface header
+        + creates logo
+        + creates download data, and project info button
+    + `ui.sidebar.R`
+      - creates user interface sidebar element
+        + creates user input options
+          - data filtering types
+          - map coloring options
+          - bin map x and y changes
+          - reactive grapgs from map toggle
+    + `ui.body.R`
+      - contains 2 libraries utilized in the UI
+        + shinydashboard
+        + dashboardthemes
+      - css calls:
+        + `map&overlay.css` alters css for leaflet map and overly element
+        + `column_limiter.css` limits column sizes when re-adjusting screen.
+        + `map_height.css` this allows the map height to be changed into percentages
+        + `shiny_output.css` this limits the warnings and fake-error messages outputted by packages
+      - HTML calls:
+        + `google_analytics.html` this isnt included in the GitHub, but it connect the dashboard to Google Analytics
+      - JS calls:
+        + `tracking.js` this connects dashboard elements to GA, to grab usage data
+        + `window_dimentions.js` relays window size information back to dashboard
+      - renders elements:
+        + text elements
+        + leaflet output
+        + plotly heatmap output
+        + overlay panel
+          - lollipop chart output
+          - progress bar output
 
-* `/server/`
-  + folder stores all parts needed for the server
-  + `server.R`
-    - contains library: shiny
-    - creates interactive server
-      + reactive element: scrapes map screen data
-      + elements: text outputs
-        - create python function file for this
-      + interactive element: leaflet map creation
-      + reactive: interactive: element: plotly heatmap creation
-      + creates overlay output graphs
-        - reactive element: lollipop chart creation
-        - reactive element: percentage bar creation
-
-* `/pybackend/`
-  + folder stores all python scripts used for the webpage backend
-  + `bin_geo.py`
-    - no dependencies
-    - script take latitude and longitude data and creates bins based on user input
-  + `console_print.py`
-    - WORK IN PROGRESS
-      + need to store functions for printing data collection
-      + need to store functions to create server logs
-      + scrapes user data for future use
-      
-* `/css/`
-  + `map&overlay.css`
-    - css file that modifies:
+* `/backend/`
+  + folder stores all scripts used for the webpage backend
+  * `/css/`
+    + `map&overlay.css`
       + custom fonts for overlay
       + background style for overlay
       + map background style
       + variable height for map
-
+    + `column_limiter.css`
+      + overrides and creates a mininum width for columns to adjust
+    + `map_height.css`
+      + allows the leaflet map to be converted into percentage of screen
+    + `shiny_output.css`
+      + limits error and warning messages outputted into console
+  + `/js/`
+    - `tracking.js`
+      + Google Analyitics tracking interactive elements
+    + `window_dimensions.js`
+      + grabs the screens dimensions (not currently in play)
+  + `html`
+    - `google_analytics.html`
+      + Google Analytics tracking code
+    - `min&max_viewport.html`
+      + limits min and max size of dashboard display
+  + `/python/`
+    + `bin_geo.py`
+      - no dependencies
+      - script take latitude and longitude data and creates bins based on user input
+      
 * `/www/`
-  + `/hero_icons/`
-    - stores icons for rubbish litter types
-  + stores rubbish logo and cloud background
+  + stores all images and icons used in dashboard
