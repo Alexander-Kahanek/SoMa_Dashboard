@@ -2,6 +2,8 @@
 
 This is the file structure of the dashboard, including what is included in each file.
 
+If trying to recreate the dashboard, you will need to comment out L20 / L22 in `/UI/body.R` as those are calls to the GA tracking that is not included in the GitHub.
+
 * `app.R`
   + main: file calls main header files and created the application
   + contains source files and creates shiny application
