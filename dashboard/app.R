@@ -15,4 +15,4 @@ shinyApp(
 )
 
 # library(rsconnect)
-# rsconnect::deployApp(getwd())
+# rsconnect::deployApp(getwd(), account="rubbishlove")
