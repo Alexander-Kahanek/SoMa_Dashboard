@@ -5,9 +5,6 @@ source('server/server.R')
 #############################################################
 # run application
 
-# ggplot swap axis, scale_x_continuous()
-# position = "left",
-
 
 shinyApp(
   ui = ui,

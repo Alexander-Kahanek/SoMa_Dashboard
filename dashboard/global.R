@@ -11,7 +11,7 @@ library(ggthemes) # overlay themes
 
 library(heatmaply) # for heatmap
 library(plotly) # for heatmaply rendering, options
-library(RColorBrewer) ## get rid of
+library(RColorBrewer) # get rid of certain colors
 
 library(reticulate) # for python integration
 source_python('backend/python/bin_geo.py') # coordinates bin calculator
