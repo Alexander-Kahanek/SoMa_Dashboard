@@ -85,6 +85,25 @@ This is the file structure of the dashboard, including what is included in each 
           - lollipop chart output
           - progress bar output
 
++ `/raw/`
+  + this holds all the raw data and cleaning scripts
+    - the true original data file is not included, as it includes personal information
+  + `clean_rubbish.csv`
+    + this is the cleaned data set used inside the dashboard
+  + `/OG/`
+    + `/shape_files/`
+      - this stores the commercial and redidential shape files used for zoning classification
+      - http://geojson.io/
+    - `one_clean_data.R`
+      + the first script that the raw data is pushed through
+      + this cleans columns, feature names, fixes dates
+    - `two_flatten&classify.py`
+      + the second script that the data is pushed through
+      + this flattens the data points, and does the zoning classification
+    + `Rclean_rubbish.csv`
+      + this is the data file that is exported to users in the dashboard
+
+
 * `/backend/`
   + folder stores all scripts used for the webpage backend
   * `/css/`
