@@ -2,7 +2,7 @@
 
 [HERE is the link to the dashboard](https://rubbishlove.shinyapps.io/dashboard/)
 
-<p align="center"><img src="https://alexander-kahanek.github.io/assests/img/dashboard-img.png"></p>
+<p align="center"><img src="https://alexander-kahanek.github.io/assets/img/dashboard-img.png"></p>
 
 This repository will hold the code and structure layout for the dashboard. 
 
