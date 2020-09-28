@@ -2,6 +2,8 @@
 
 [HERE is the link to the dashboard](https://rubbishlove.shinyapps.io/dashboard/)
 
+<p align="center"><img src="dashboard-img.png"> </p>
+
 This repository will hold the code and structure layout for the dashboard. 
 
 # What is the dashboard?
