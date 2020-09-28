@@ -1,8 +1,8 @@
 # Rubbish SoMa West Dashboard
 
-[HERE is the link to the dashboard](https://rubbishlove.shinyapps.io/dashboard/)
-
 <p align="center"><img src="https://alexander-kahanek.github.io/assets/img/dashboard-img.png"></p>
+
+[HERE is the link to the dashboard](https://rubbishlove.shinyapps.io/dashboard/)
 
 This repository will hold the code and structure layout for the dashboard. 
 
